@@ -1,9 +1,10 @@
 class TweetsController < ApplicationController
 	def create
-		@tweet = Tweet.new(tweet_params)
-		@tweet.user_id = current_user.id
-		if @tweet.save
-			redirect_to root_path
+		@newtweet = Tweet.new(tweet_params)
+		@newtweet.user_id = current_user.id
+		if @newtweet.save
+			@newtweet = Tweet.new
+			@tweets = Tweet.all.order(id: "DESC")
 		else
 		   #ツイートできなかった時の処理
 		end

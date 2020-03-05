@@ -1,0 +1,16 @@
+<%= form_for newtweet, remote: true do |f| %>
+  <div class="form-group row">
+    <%= f.text_area :body, :placeholder => 'ツイート内容を入力', class:'col-xs-12' %>
+  </div>
+  <div class="actions row">
+    <%= f.submit 'ツイート', class:'btn btn-primary col-xs-12' %>
+  </div>
+<% end %>
+
+<% tweets.each do |tweet| %>
+<div class="well well-lg">
+  <%= tweet.user.name %><br>
+  <%= tweet.body %><br>
+  <%= tweet.created_at %><br>
+</div>
+<% end %>
