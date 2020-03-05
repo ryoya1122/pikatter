@@ -5,28 +5,28 @@
   <div class="actions row">
     <%= f.submit 'ツイート', class:'btn btn-primary col-xs-12' %>
   </div>
-<% end %>
-
+<% end %><br>
 <% tweets.each do |tweet| %>
 <div class="well well-lg">
   <div class="label label-success"><%= tweet.user.name %></div><br>
   <h4><%= tweet.body %></h4><br>
   <h5>センチメンタルスコア <%= tweet.score %> <%= tweet.sentiment %></h5>
-  <%= tweet.created_at %><br>
+  <div class="row">
+  <label class="col-xs-4">Negative</label><label class="col-xs-4 text-center">Neutral</label><label class="col-xs-4 text-right">Positive</label><br></div>
   <div class="progress">
+  	
   	<% if tweet.score < 20 %>
-	<div class="progress-bar" role="progressbar" style="width: <%= tweet.score %>%;">
+	<div class="progress-bar" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 40 > tweet.score && tweet.score >= 20 %>
-	<div class="progress-bar progress-bar-danger" role="progressbar" style="width: <%= tweet.score %>%;">
+	<div class="progress-bar progress-bar-danger" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 60 > tweet.score && tweet.score >= 40 %>
-	<div class="progress-bar progress-bar-warning" role="progressbar" style="width: <%= tweet.score %>%;">
+	<div class="progress-bar progress-bar-warning" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 80 > tweet.score && tweet.score >= 60 %>
-	<div class="progress-bar progress-bar-info" role="progressbar" style="width: <%= tweet.score %>%;">
+	<div class="progress-bar progress-bar-info" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 100 >= tweet.score && tweet.score >= 80 %>
-	<div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= tweet.score %>%;">
+	<div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% end %>
-		<span class="sr-only"></span>
 	</div>
-</div>
-</div>
+	</div>
+		<span class="sr-only"></span>
 <% end %>
