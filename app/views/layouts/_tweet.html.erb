@@ -9,8 +9,24 @@
 
 <% tweets.each do |tweet| %>
 <div class="well well-lg">
-  <%= tweet.user.name %><br>
-  <%= tweet.body %><br>
+  <div class="label label-success"><%= tweet.user.name %></div><br>
+  <h4><%= tweet.body %></h4><br>
+  <h5>センチメンタルスコア <%= tweet.score %> <%= tweet.sentiment %></h5>
   <%= tweet.created_at %><br>
+  <div class="progress">
+  	<% if tweet.score < 20 %>
+	<div class="progress-bar" role="progressbar" style="width: <%= tweet.score %>%;">
+	<% elsif 40 > tweet.score && tweet.score >= 20 %>
+	<div class="progress-bar progress-bar-danger" role="progressbar" style="width: <%= tweet.score %>%;">
+	<% elsif 60 > tweet.score && tweet.score >= 40 %>
+	<div class="progress-bar progress-bar-warning" role="progressbar" style="width: <%= tweet.score %>%;">
+	<% elsif 80 > tweet.score && tweet.score >= 60 %>
+	<div class="progress-bar progress-bar-info" role="progressbar" style="width: <%= tweet.score %>%;">
+	<% elsif 100 >= tweet.score && tweet.score >= 80 %>
+	<div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= tweet.score %>%;">
+	<% end %>
+		<span class="sr-only"></span>
+	</div>
+</div>
 </div>
 <% end %>
