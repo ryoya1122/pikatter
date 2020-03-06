@@ -1,12 +1,6 @@
-<%= form_for newtweet, remote: true do |f| %>
-  <div class="form-group row">
-    <%= f.text_area :body, :placeholder => 'ツイート内容を入力', class:'col-xs-12' %>
-  </div>
-  <div class="actions row">
-    <%= f.submit 'ツイート', class:'btn btn-primary col-xs-12' %>
-  </div>
-<% end %><br>
-<% tweets.each do |tweet| %>
+<h2><%= @user.name %>さんのつぶやき</h2>
+
+<% @tweets.each do |tweet| %>
 <div class="well well-lg">
   <div class="label label-success"><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
   <h4><%= tweet.body %></h4><br>

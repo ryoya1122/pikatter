@@ -10,7 +10,6 @@ class TweetsController < ApplicationController
 		client.create_access_token
 
 		@data = client.sentiment(sentence: @newtweet.body)
-
 		@newtweet.sentiment = @data["result"]["sentiment"]
 		@newtweet.score = @data["result"]["score"]
 
