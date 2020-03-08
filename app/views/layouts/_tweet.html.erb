@@ -11,9 +11,9 @@
   <div class="card-header"><%= attachment_image_tag tweet.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
   <div class="card-body">
   <h4><%= tweet.body %></h4><br>
-  <h5>センチメンタルスコア <%= tweet.score %> <%= tweet.sentiment %></h5>
+  <h5><%= tweet.score.round %> <%= tweet.sentiment %></h5>
   <div class="row">
-  <label class="col-4">Negative</label><label class="col-4 text-xs-center">Neutral</label><label class="col-4 text-xs-right">Positive</label><br></div>
+  <label class="col-4">Negative</label><label class="col-4 text-center">Neutral</label><label class="col-4 text-right">Positive</label><br></div>
   <div class="progress">
   	
   	<% if tweet.score < 20 %>

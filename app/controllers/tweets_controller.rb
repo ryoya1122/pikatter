@@ -24,7 +24,10 @@ class TweetsController < ApplicationController
 				@newtweet.score *= -33
 				@newtweet.score += 33
 		end
-
+		@user = current_user
+		@user.tweet_count += 1
+		@user.score_average = ( @user.score_average * ( @user.tweet_count - 1 ) + @newtweet.score ) / @user.tweet_count
+		@user.save
 		if @newtweet.save
 			@newtweet = Tweet.new
 			@tweets = Tweet.all.order(id: "DESC")
