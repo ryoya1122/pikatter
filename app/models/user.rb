@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :tweets
   has_many :favorites
-
+  attachment :image
   def to_param
     name
   end

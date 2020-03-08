@@ -1,0 +1,10 @@
+<h2>ユーザー情報編集</h2>
+<%= form_for(@user) do |f| %>
+    <Label>ユーザー名</Label>
+        <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"ユーザー名"%>
+    <label>プロフィール画像</label><br>
+    <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "user-edit-form" %><br>
+    <label>メールアドレス</label>
+        <%= f.text_area :email, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"メールアドレス"%>
+    <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
+<% end %>

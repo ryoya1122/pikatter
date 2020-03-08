@@ -1,26 +1,95 @@
+<div class="row">
+	<div class="col-6">
+		<h2><%= @user.name %>さんの感情分析</h2><br>
+		<h3><%= @user.name %>さんの平均感情スコア</h3>
+			84.75322532 Positive
+		<p><%= @user.name %>さんはとてもポジティブな呟きが多いです</p>
+		<h3><%= @user.name %>さんの感情移行カレンダー</h3>
+		<h3><%= @user.name %>さんのポジティブランキング</h3>
+			5位/全365ユーザー中
+		<h3><%= @user.name %>さんの今月もっともポジティブだったつぶやき</h3>
+
+		<div class="card">
+  <div class="card-header"><%= attachment_image_tag @most_positive.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to @most_positive.user.name, user_path(@most_positive.user) %></div><br>
+  <div class="card-body">
+  <h4><%= @most_positive.body %></h4><br>
+  <h5>センチメンタルスコア <%= @most_positive.score %> <%= @most_positive.sentiment %></h5>
+  <div class="row">
+  <label class="col-4">Negative</label><label class="col-4 text-xs-left">Neutral</label><label class="col-4 text-xs-left">Positive</label><br></div>
+  <div class="progress">
+  	
+  	<% if @most_positive.score < 20 %>
+	<div class="progress-bar" role="progressbar" style="width: <%= @most_positive.score %>%;"></div>
+	<% elsif 40 > @most_positive.score && @most_positive.score >= 20 %>
+	<div class="progress-bar bg-danger" role="progressbar" style="width: <%= @most_positive.score %>%;"></div>
+	<% elsif 60 > @most_positive.score && @most_positive.score >= 40 %>
+	<div class="progress-bar bg-warning" role="progressbar" style="width: <%= @most_positive.score %>%;"></div>
+	<% elsif 80 > @most_positive.score && @most_positive.score >= 60 %>
+	<div class="progress-bar bg-info" role="progressbar" style="width: <%= @most_positive.score %>%;"></div>
+	<% elsif 100 >= @most_positive.score && @most_positive.score >= 80 %>
+	<div class="progress-bar bg-success" role="progressbar" style="width: <%= @most_positive.score %>%;"></div>
+	<% end %>
+	</div>
+	</div>
+		<span class="sr-only"></span>
+  </div>
+
+		<h3><%= @user.name %>さんの今月もっともネガティブだったつぶやき</h3>
+
+		<div class="card">
+  <div class="card-header"><%= attachment_image_tag @most_negative.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to @most_negative.user.name, user_path(@most_negative.user) %></div><br>
+  <div class="card-body">
+  <h4><%= @most_negative.body %></h4><br>
+  <h5>センチメンタルスコア <%= @most_negative.score %> <%= @most_negative.sentiment %></h5>
+  <div class="row">
+  <label class="col-4">Negative</label><label class="col-4 text-xs-left">Neutral</label><label class="col-4 text-xs-left">Positive</label><br></div>
+  <div class="progress">
+  	
+  	<% if @most_negative.score < 20 %>
+	<div class="progress-bar" role="progressbar" style="width: <%= @most_negative.score %>%;"></div>
+	<% elsif 40 > @most_negative.score && @most_negative.score >= 20 %>
+	<div class="progress-bar bg-danger" role="progressbar" style="width: <%= @most_negative.score %>%;"></div>
+	<% elsif 60 > @most_negative.score && @most_negative.score >= 40 %>
+	<div class="progress-bar bg-warning" role="progressbar" style="width: <%= @most_negative.score %>%;"></div>
+	<% elsif 80 > @most_negative.score && @most_negative.score >= 60 %>
+	<div class="progress-bar bg-info" role="progressbar" style="width: <%= @most_negative.score %>%;"></div>
+	<% elsif 100 >= @most_negative.score && @most_negative.score >= 80 %>
+	<div class="progress-bar bg-success" role="progressbar" style="width: <%= @most_negative.score %>%;"></div>
+	<% end %>
+	</div>
+	</div>
+		<span class="sr-only"></span>
+  </div>
+
+	</div>
+	<div class="col-6">
 <h2><%= @user.name %>さんのつぶやき</h2>
 
 <% @tweets.each do |tweet| %>
-<div class="well well-lg">
-  <div class="label label-success"><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
+<div class="card">
+  <div class="card-header"><%= attachment_image_tag tweet.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
+  <div class="card-body">
   <h4><%= tweet.body %></h4><br>
   <h5>センチメンタルスコア <%= tweet.score %> <%= tweet.sentiment %></h5>
   <div class="row">
-  <label class="col-xs-4">Negative</label><label class="col-xs-4 text-center">Neutral</label><label class="col-xs-4 text-right">Positive</label><br></div>
+  <label class="col-4">Negative</label><label class="col-4 text-xs-left">Neutral</label><label class="col-4 text-xs-left">Positive</label><br></div>
   <div class="progress">
   	
   	<% if tweet.score < 20 %>
 	<div class="progress-bar" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 40 > tweet.score && tweet.score >= 20 %>
-	<div class="progress-bar progress-bar-danger" role="progressbar" style="width: <%= tweet.score %>%;"></div>
+	<div class="progress-bar bg-danger" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 60 > tweet.score && tweet.score >= 40 %>
-	<div class="progress-bar progress-bar-warning" role="progressbar" style="width: <%= tweet.score %>%;"></div>
+	<div class="progress-bar bg-warning" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 80 > tweet.score && tweet.score >= 60 %>
-	<div class="progress-bar progress-bar-info" role="progressbar" style="width: <%= tweet.score %>%;"></div>
+	<div class="progress-bar bg-info" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% elsif 100 >= tweet.score && tweet.score >= 80 %>
-	<div class="progress-bar progress-bar-success" role="progressbar" style="width: <%= tweet.score %>%;"></div>
+	<div class="progress-bar bg-success" role="progressbar" style="width: <%= tweet.score %>%;"></div>
 	<% end %>
 	</div>
 	</div>
 		<span class="sr-only"></span>
+  </div>
 <% end %>
+</div>
+</div>
