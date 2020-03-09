@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 		@tweets = Tweet.where(user_id: @user.id).order(id: "DESC")
 		@most_positive = Tweet.where(user_id: @user.id).order("score DESC").first
 		@most_negative = Tweet.where(user_id: @user.id).order("score").first
+		@favorite = Favorite.new
 	end
 	def edit
 		@user = User.find_by!(name: params[:name])

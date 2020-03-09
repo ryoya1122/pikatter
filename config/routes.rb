@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   }
 
   resources :users, param: :name
-  resources :tweets
+  resources :tweets do
+  	resource :favorites, only: [:create, :destroy]
+  end
 
 end

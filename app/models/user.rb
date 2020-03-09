@@ -4,11 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :tweets
-  has_many :favorites
+  has_many :tweets, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_tweets, through: :favorites, source: :tweet
   attachment :image
   def to_param
     name
   end
-  
 end
