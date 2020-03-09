@@ -15,9 +15,16 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="Navbar">
       <ul class="navbar-nav mr-auto">
+        <% if user_signed_in? %>
         <li class="nav-item"><a class="nav-link" href="/users/<%= current_user.name %>">マイページ</a></li>
+        <% end %>
         <li class="nav-item"><a class="nav-link" href="/ranking">ランキング</a></li>
+        <% if user_signed_in? %>
         <li class="nav-item"><a class="nav-link" href="#">通知</a></li>
+        <li class="nav-item"><%= link_to ' logout', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+        <% else %>
+        <li class="nav-item"><%= link_to ' login', new_user_session_path, class: 'nav-link' %></li>
+        <% end %>
       </ul>
       <ul class="navbar-nav mr-lg-2">
         <li class="nav-item dropdown">

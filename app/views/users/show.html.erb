@@ -60,7 +60,7 @@
 	</div>
 	<div class="col-6">
 <h2><%= @user.name %>さんのつぶやき</h2>
-
+	<%= render 'layouts/follow_button', user: @user %>
 <% @tweets.each do |tweet| %>
 <div class="card">
   <div class="card-header"><%= attachment_image_tag tweet.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
