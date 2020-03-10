@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+	PER = 8
 	def create
 		@newtweet = Tweet.new(tweet_params)
 		@newtweet.user_id = current_user.id
@@ -28,9 +29,21 @@ class TweetsController < ApplicationController
 		@user.tweet_count += 1
 		@user.score_average = ( @user.score_average * ( @user.tweet_count - 1 ) + @newtweet.score ) / @user.tweet_count
 		@user.save
+		if AverageScore.find_by(user_id: current_user.id, day: Date.today).blank?
+			@average_score = AverageScore.new
+			@average_score.user_id = current_user.id
+			@average_score.score = @newtweet.score
+			@average_score.count = 1
+			@average_score.day = Date.today
+		else
+			@average_score = AverageScore.find_by(user_id: current_user.id, day: Date.today)
+			@average_score.score = ( @average_score.score * @average_score.count + @newtweet.score ) / (@average_score.count + 1 )
+			@average_score.count += 1
+		end
+		@average_score.save
 		if @newtweet.save
 			@newtweet = Tweet.new
-			@tweets = Tweet.all.order(id: "DESC")
+			@tweets = Tweet.all.order(id: "DESC").page(params[:page]).per(PER)
 		else
 		   #ツイートできなかった時の処理
 		end

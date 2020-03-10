@@ -52,11 +52,13 @@
 # server "example.com",
 #   user: "user_name",
 #   roles: %w{web app},
-#   ssh_options: {
-#     user: "user_name", # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: "please use keys"
-#   }
-server '13.112.251.39', user: 'ec2-user', roles: %w{app web db}
+
+server '13.112.251.39', user: 'ec2-user', roles: %w{app web db}, keys: %w(/home/vagrant/.ssh/pikatter.pem);
+
+# ssh_options: {
+# user: "ec2-user", # overrides user setting above
+
+# forward_agent: false,
+# auth_methods: %w(publickey password)
+# password: "please use keys"
+# }

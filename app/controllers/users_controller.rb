@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 		@most_positive = Tweet.where(user_id: @user.id).order("score DESC").first
 		@most_negative = Tweet.where(user_id: @user.id).order("score").first
 		@favorite = Favorite.new
+		@score_between = AverageScore.where(day: (7.days.ago)..(Date.today))
+		@graph = {}
+		@score_between.each do |score_between|
+			@graph[score_between.day] = score_between.score
+		end
 	end
 	def edit
 		@user = User.find_by!(name: params[:name])

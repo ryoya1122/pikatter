@@ -3,7 +3,8 @@
 		<h2><%= attachment_image_tag @user, :image, :fill, 80, 80, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'80x80' %><%= @user.name %>さんの感情分析</h2><br>
 		<h3><%= @user.name %>さんの平均感情スコア</h3>
 			<%= @user.score_average.round %>
-		<h3><%= @user.name %>さんの感情移行カレンダー</h3>
+		<h3><%= @user.name %>さんの1週間感情移行</h3>
+		<div class="bg-transparent bg-dark"><%= line_chart @graph, download: {background: "#ffffff"} %></div>
 		<h3><%= @user.name %>さんの今月もっともポジティブだったつぶやき</h3>
 		<div class="card">
   <div class="card-header"><%= attachment_image_tag @most_positive.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to @most_positive.user.name, user_path(@most_positive.user) %></div><br>
