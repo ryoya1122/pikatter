@@ -30,22 +30,7 @@
 	</div>
 	</div>
 		<span class="sr-only"></span>
-    <h3>いいね件数: <%= tweet.favorites.count %></h3>
-<% if tweet.favorited_by?(current_user) %>
-  <li>
-    <%= link_to tweet_favorites_path(tweet), method: :delete do %>
-      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-      <%= tweet.favorites.count %> いいね
-    <% end %>
-  </li>
-<% else %>
-  <li>
-    <%= link_to tweet_favorites_path(tweet), method: :post do %>
-      <i class="fa fa-heart-o" aria-hidden="true"></i>
-      <%= tweet.favorites.count %> いいね
-    <% end %>
-  </li>
-<% end %>
+    <div id="like_<%= tweet.id %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
   </div><br>
 <% end %>
 <%= paginate tweets %>
