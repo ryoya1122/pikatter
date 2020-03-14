@@ -4,9 +4,15 @@ class HomeController < ApplicationController
 
 	def index
 		@user = current_user
+		@users = @user.followings
+		@following_user_id = []
+		@users.each do |following|
+			@following_user_id.push(following.id)
+		end
+		@following_user_id.push(current_user.id)
 		@newtweet = Tweet.new
-		@tweets = Tweet.all.order(id: "DESC").page(params[:page]).per(PER)
+		@tweets = Tweet.where(user_id: @following_user_id).order(created_at: "DESC").page(params[:page]).per(PER)
 		@favorite = Favorite.new
+		binding.pry
 	end
-
 end

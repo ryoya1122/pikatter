@@ -30,7 +30,11 @@
 	</div>
 	</div>
 		<span class="sr-only"></span>
-    <div id="like_<%= tweet.id %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
+    <div class="row">
+    <div class="col-4" id="like_<%= tweet.id %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
+    <div class="col-4" id="retweet_<%= tweet.id %>"><%= render partial: 'layouts/retweet', locals: { tweet: tweet } %></div>
+    <div class="col-4" id="bad_<%= tweet.id %>"><%= render partial: 'layouts/bad', locals: { tweet: tweet } %></div>
+  </div>
   </div><br>
 <% end %>
 <%= paginate tweets %>

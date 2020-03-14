@@ -1,0 +1,11 @@
+<% if tweet.retweeted_by?(current_user) %>
+    <%= link_to tweet_retweets_path(tweet), method: :delete, remote: true do %>
+    <i class="fas fa-retweet" aria-hidden="true" style="color: green;"></i>
+      <%= tweet.retweets.count %>
+    <% end %>
+<% else %>
+    <%= link_to tweet_retweets_path(tweet), method: :post, remote: true do %>
+    <i class="fas fa-retweet" aria-hidden="true"></i>
+      <%= tweet.retweets.count %>
+    <% end %>
+<% end %>

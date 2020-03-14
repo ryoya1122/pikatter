@@ -1,0 +1,11 @@
+<% if tweet.baded_by?(current_user) %>
+    <%= link_to tweet_bads_path(tweet), method: :delete, remote: true do %>
+    <i class="fas fa-times" aria-hidden="true" style="color: red;"></i>
+      <%= tweet.bads.count %>
+    <% end %>
+<% else %>
+    <%= link_to tweet_bads_path(tweet), method: :post, remote: true do %>
+    <i class="fas fa-times" aria-hidden="true"></i>
+      <%= tweet.bads.count %>
+    <% end %>
+<% end %>

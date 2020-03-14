@@ -1,0 +1,1 @@
+$('#retweet_<%= @tweet.id %>').html("<%= j(render partial: 'layouts/retweet', locals: {tweet: @tweet}) %>");
