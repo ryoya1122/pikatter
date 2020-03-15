@@ -1,0 +1,17 @@
+<% if @notifications.blank? %>
+<p>通知はありません</p>
+<% else %>
+	<% @notifications.each do |notification| %>
+		<div class="card">
+		<%= link_to notification.visitor.name, user_path(notification.visitor) %>さんが<br>
+		<%= link_to notification.tweet.body.truncate(24), tweet_path(notification.tweet) %>を
+		<% case notification.action %>
+		<% when 'favorite' %>
+		いいねしました
+		<% when 'retweet' %>
+		リツイートしました
+		<% end %><br>
+		</div>
+	<% end %>
+<%= paginate @notifications %>
+<% end %>

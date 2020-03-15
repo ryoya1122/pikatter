@@ -13,6 +13,5 @@ class HomeController < ApplicationController
 		@newtweet = Tweet.new
 		@tweets = Tweet.where(user_id: @following_user_id).order(created_at: "DESC").page(params[:page]).per(PER)
 		@favorite = Favorite.new
-		binding.pry
 	end
 end

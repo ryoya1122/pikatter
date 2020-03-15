@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   	resource :bads, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
+  resources :notifications, only: :index
 end
