@@ -10,8 +10,11 @@
 <div class="card">
   <div class="card-header"><%= attachment_image_tag tweet.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
   <div class="card-body">
+    <% if !tweet.status.nil? %>
+    <p><%= tweet.status %></p>
+    <% end %>
   <h4><%= tweet.body %></h4><br>
-  <h5><%= tweet.score.round %> <%= tweet.sentiment %></h5>
+  <span><%= time_ago_in_words(tweet.created_at) %></span>
   <div class="row">
   <label class="col-4">Negative</label><label class="col-4 text-center">Neutral</label><label class="col-4 text-right">Positive</label><br></div>
   <div class="progress">

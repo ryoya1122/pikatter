@@ -10,8 +10,18 @@ class HomeController < ApplicationController
 			@following_user_id.push(following.id)
 		end
 		@following_user_id.push(current_user.id)
+		@retweet_ids = Retweet.where(user_id: @following_user_id)
+		@retweet_tweets = []
+		@retweet_ids.each do |retweet_id|
+			tweet = Tweet.where(id: retweet_id.tweet_id)
+			tweet.update_all(status: retweet_id.user.name+ "さんがリツイートしました")
+			tweet.update_all(status_by_user: retweet_id.user_id)
+			@retweet_tweets += tweet
+		end
 		@newtweet = Tweet.new
-		@tweets = Tweet.where(user_id: @following_user_id).order(created_at: "DESC").page(params[:page]).per(PER)
+		@follow_tweets = Tweet.where(user_id: @following_user_id)
+		@tweets = (@retweet_tweets + @follow_tweets).uniq
+		@tweets = Tweet.where(id: @tweets.uniq.map{ |tweet| tweet.id }).order(:updated_at).page(params[:page]).per(PER)
 		@favorite = Favorite.new
 	end
 end
