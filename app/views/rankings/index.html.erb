@@ -1,0 +1,7 @@
+<h1>全ユーザー<%= User.all.count %>人の平均感情スコア<br></h1>
+<h2><%= @score_average %>
+
+<h1>ポジティブランキング</h1>
+<% @users.each_with_index do |user, i| %>
+<h3><%= i+1 %>位 <%= user.name %> <%= user.score_average %><br></h3>
+<% end %>

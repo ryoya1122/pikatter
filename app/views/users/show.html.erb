@@ -7,6 +7,9 @@
 		<div class="bg-transparent bg-dark"><%= line_chart @graph, min: 0, max: 100, download: {background: "#ffffff"} %></div>
 		<h3><%= @user.name %>さんの今月もっともポジティブだったつぶやき</h3>
 		<div class="card">
+			<% if @most_positive.blank? %>
+			このユーザーのツイートは見つかりませんでした
+			<% else %>
   <div class="card-header"><%= attachment_image_tag @most_positive.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to @most_positive.user.name, user_path(@most_positive.user) %></div><br>
   <div class="card-body">
   <h4><%= @most_positive.body %></h4><br>
@@ -29,11 +32,15 @@
 	</div>
 	</div>
 		<span class="sr-only"></span>
+		<% end %>
   </div>
 
 		<h3><%= @user.name %>さんの今月もっともネガティブだったつぶやき</h3>
 
 		<div class="card">
+			<% if @most_negative.blank? %>
+			このユーザーのツイートは見つかりませんでした
+			<% else %>
   <div class="card-header"><%= attachment_image_tag @most_negative.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to @most_negative.user.name, user_path(@most_negative.user) %></div><br>
   <div class="card-body">
   <h4><%= @most_negative.body %></h4><br>
@@ -56,12 +63,16 @@
 	</div>
 	</div>
 		<span class="sr-only"></span>
+		<% end %>
   </div>
 
 	</div>
 	<div class="col-6">
 <h2><%= @user.name %>さんのつぶやき</h2>
 	<div id="follow_button_<%= @user.id %>"><%= render partial: 'layouts/follow_button', locals: { user: @user } %></div>
+	<% if @tweets.blank? %>
+	このユーザーのツイートはありません
+	<% else %> 
 <% @tweets.each do |tweet| %>
 <div class="card">
   <div class="card-header"><%= attachment_image_tag tweet.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to tweet.user.name, user_path(tweet.user) %></div><br>
@@ -88,5 +99,6 @@
 		<span class="sr-only"></span>
   	</div>
 <% end %>
+<% end %> 
 </div>
 </div>

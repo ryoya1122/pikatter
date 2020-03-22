@@ -1,0 +1,28 @@
+<% replys.each do |reply| %>
+<div class="card">
+	<div class="card-header">
+		<div><i class="fas fa-reply" aria-hidden="true"></i></div>
+		<%= attachment_image_tag reply.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to reply.user.name, user_path(reply.user) %>
+	</div>
+	<div class="card-body">
+		<%= reply.body %><br><p class="text-right"><%= time_ago_in_words(reply.created_at) %></p>
+	</div>
+</div>
+<% end %>
+
+<div class="card">
+			<div class="card-header">
+				<i class="fas fa-reply" aria-hidden="true"></i>
+			</div>
+			<div class="card-body">
+				<%= form_for newreply, url: tweet_replies_path(tweet), remote: true do |f| %>
+  					<div class="form-group row">
+    					<%= f.text_field :body, :placeholder => 'リプライ内容を入力', class:'col-12 form-control' %>
+    					<%= f.hidden_field :tweet_id, :value => tweet.id %>
+  					</div>
+  					<div class="actions row">
+    					<%= f.submit '送信', class:'btn btn-primary offset-10 col-2' %>
+  					</div>
+				<% end %>
+			</div>
+		</div>

@@ -1,0 +1,20 @@
+<div class="card">
+	<div class="card-header">
+		<%= attachment_image_tag user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to user.name, user_path(user) %>
+			
+		</div>
+	<div class="card-body row">
+		<div class="col-4">
+			<%= link_to "ツイート", user_path(user.name) %><br>
+			<%= link_to user.tweets.count, user_path(user.name) %>
+		</div>
+		<div class="col-4">
+			<%= link_to "フォロー", user_followings_path(user) %><br>
+			<%= link_to user.followings.count, user_followings_path(user) %>
+		</div>
+		<div class="col-4">
+			<%= link_to "フォロワー", user_followers_path(user) %><br>
+			<%= link_to user.followers.count, user_followers_path(user) %>
+		</div>
+	</div>
+	</div>

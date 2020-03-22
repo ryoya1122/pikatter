@@ -1,11 +1,11 @@
-<% if tweet.retweeted_by?(current_user) %>
-    <%= link_to tweet_retweets_path(tweet), method: :delete, remote: true do %>
+<% if Tweet.find(tweet["id"]).retweeted_by?(current_user) %>
+    <%= link_to tweet_retweets_path(Tweet.find(tweet["id"])), method: :delete, remote: true do %>
     <i class="fas fa-retweet" aria-hidden="true" style="color: green;"></i>
-      <%= tweet.retweets.count %>
+      <%= Tweet.find(tweet["id"]).retweets.count %>
     <% end %>
 <% else %>
-    <%= link_to tweet_retweets_path(tweet), method: :post, remote: true do %>
+    <%= link_to tweet_retweets_path(Tweet.find(tweet["id"])), method: :post, remote: true do %>
     <i class="fas fa-retweet" aria-hidden="true"></i>
-      <%= tweet.retweets.count %>
+      <%= Tweet.find(tweet["id"]).retweets.count %>
     <% end %>
 <% end %>

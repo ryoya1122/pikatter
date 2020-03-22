@@ -1,11 +1,11 @@
-<% if tweet.baded_by?(current_user) %>
-    <%= link_to tweet_bads_path(tweet), method: :delete, remote: true do %>
+<% if Tweet.find(tweet["id"]).baded_by?(current_user) %>
+    <%= link_to tweet_bads_path(Tweet.find(tweet["id"])), method: :delete, remote: true do %>
     <i class="fas fa-times" aria-hidden="true" style="color: red;"></i>
-      <%= tweet.bads.count %>
+      <%= Tweet.find(tweet["id"]).bads.count %>
     <% end %>
 <% else %>
-    <%= link_to tweet_bads_path(tweet), method: :post, remote: true do %>
+    <%= link_to tweet_bads_path(Tweet.find(tweet["id"])), method: :post, remote: true do %>
     <i class="fas fa-times" aria-hidden="true"></i>
-      <%= tweet.bads.count %>
+      <%= Tweet.find(tweet["id"]).bads.count %>
     <% end %>
 <% end %>
