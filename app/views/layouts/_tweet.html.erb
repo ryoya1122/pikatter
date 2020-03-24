@@ -1,66 +1,51 @@
 <%= form_for newtweet, remote: true do |f| %>
   <div class="form-group row">
-    <%= f.text_field :body, :placeholder => 'ツイート内容を入力', class:'col-xs-12 form-control' %>
+    <%= f.text_field :body, :placeholder => 'ツイート内容を入力', class:'col-12 form-control' %>
   </div>
   <div class="actions row">
-    <%= f.submit 'ツイート', class:'btn btn-primary col-xs-12' %>
+    <%= f.submit 'ツイート', class:'btn btn-primary col-12' %>
   </div>
 <% end %><br>
 <% tweets.each do |tweet| %>
 <div class="card">
-  <div class="card-header"><%= attachment_image_tag User.find(tweet["user_id"]), :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to User.find(tweet["user_id"]).name, user_path(User.find(tweet["user_id"])) %>
-    <% if tweet["user_id"] == current_user.id.to_s %>
-<%= link_to "削除", tweet_path(Tweet.find(tweet["id"])), method: :delete, data: { remote: true, confirm: '本当に削除しますか?' } , class: "btn btn-danger" %>
+  <div class="card-body"><%= attachment_image_tag User.find(tweet[:user_id]), :image, :fill, 60, 60, format: 'jpeg', class: "rounded-circle img-thumbnail", fallback: "no_image.jpg", size:'60x60' %> <span class="align-middle h4"><%= User.find(tweet[:user_id]).nickname %></span> <%= link_to User.find(tweet[:user_id]).name, user_path(User.find(tweet[:user_id])), class:"font-weight-bold align-middle" %>
+    <% if tweet[:user_id] == current_user.id.to_s %>
+<%= link_to "削除", tweet_path(Tweet.find(tweet[:id])), method: :delete, data: { remote: true, confirm: '本当に削除しますか?' } , class: "btn btn-danger float-right" %>
     <% end %>
-  </div><br>
-  <div class="card-body">
-    <% if tweet["status"]==1 %>
-    <p><%= User.find(tweet["status_by"]).name %>さんがリツイートしました</p>
-    <% end %>
-  <h4><%= tweet["body"] %></h4><br>
-  <span><%= time_ago_in_words(tweet["created_at"]) %></span>
-  <div class="row">
-  <label class="col-4">Negative</label><label class="col-4 text-center">Neutral</label><label class="col-4 text-right">Positive</label><br></div>
+    <% if tweet[:status]==1 %>
+    <h6><span class="text-secondary"><i class="fas fa-retweet" aria-hidden="true"></i><%= link_to User.find(tweet[:status_by]).name, user_path(User.find(tweet[:status_by])) %>さんがリツイートしました</span></h6>
+    <% end %><br>
+  <span class="align-middle h4"><%= tweet[:body] %></span><br>
+  <div class="text-right"><span><%= time_ago_in_words(tweet[:created_at]) %>前</span></div>
+  <%#<div class="row">
+  <label class="col-4">Negative</label><label class="col-4 text-center">Neutral</label><label class="col-4 text-right">Positive</label><br></div>%>
   <div class="progress">
   	
-  	<% if tweet["score"] < 20 %>
-	<div class="progress-bar" role="progressbar" style="width: <%= tweet["score"] %>%;"></div>
-	<% elsif 40 > tweet["score"] && tweet["score"] >= 20 %>
-	<div class="progress-bar bg-danger" role="progressbar" style="width: <%= tweet["score"] %>%;"></div>
-	<% elsif 60 > tweet["score"] && tweet["score"] >= 40 %>
-	<div class="progress-bar bg-warning" role="progressbar" style="width: <%= tweet["score"] %>%;"></div>
-	<% elsif 80 > tweet["score"] && tweet["score"] >= 60 %>
-	<div class="progress-bar bg-info" role="progressbar" style="width: <%= tweet["score"] %>%;"></div>
-	<% elsif 100 >= tweet["score"] && tweet["score"] >= 80 %>
-	<div class="progress-bar bg-success" role="progressbar" style="width: <%= tweet["score"] %>%;"></div>
+  	<% if tweet[:score] < 20 %>
+	<div class="progress-bar" role="progressbar" style="width: <%= tweet[:score] %>%;"></div>
+	<% elsif 40 > tweet[:score] && tweet[:score] >= 20 %>
+	<div class="progress-bar bg-danger" role="progressbar" style="width: <%= tweet[:score] %>%;"></div>
+	<% elsif 60 > tweet[:score] && tweet[:score] >= 40 %>
+	<div class="progress-bar bg-warning" role="progressbar" style="width: <%= tweet[:score] %>%;"></div>
+	<% elsif 80 > tweet[:score] && tweet[:score] >= 60 %>
+	<div class="progress-bar bg-info" role="progressbar" style="width: <%= tweet[:score] %>%;"></div>
+	<% elsif 100 >= tweet[:score] && tweet[:score] >= 80 %>
+	<div class="progress-bar bg-success" role="progressbar" style="width: <%= tweet[:score] %>%;"></div>
 	<% end %>
 	</div>
 	</div>
-		<span class="sr-only"></span>
+		<div class="card-footer">
     <div class="row">
-    <div class="col-3" id="reply_<% tweet["id"] %>"><%= link_to tweet_path(tweet["id"]) do %>
-    <i class="fas fa-reply" aria-hidden="true"></i><% end %>
+    <div class="col-3" id="reply_<%= tweet[:id] %>"><a data-toggle="collapse" data-target="#collapseExample_<%= tweet[:id] %>" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-reply" aria-hidden="true"></i> <%= Tweet.find(tweet[:id]).replys.count %></a>
     </div>
-    <div class="col-3" id="like_<%= tweet["id"] %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
-    <div class="col-3" id="retweet_<%= tweet["id"] %>"><%= render partial: 'layouts/retweet', locals: { tweet: tweet } %></div>
-    <div class="col-3" id="bad_<%= tweet["id"] %>"><%= render partial: 'layouts/bad', locals: { tweet: tweet } %></div>
-  </div>
-  </div>
-
-  <div class="row">
-  <div class="col-10 offset-2">
-<% Reply.where(tweet_id: tweet["id"]).each do |reply| %>
-<div class="card">
-  <div class="card-header">
-    <div><i class="fas fa-reply" aria-hidden="true"></i></div>
-    <%= attachment_image_tag reply.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to reply.user.name, user_path(reply.user) %>
-  </div>
-  <div class="card-body">
-    <%= reply.body %><br><p class="text-right"><%= time_ago_in_words(reply.created_at) %></p>
-  </div>
-</div>
-<% end %>
+    <div class="col-3" id="like_<%= tweet[:id] %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
+    <div class="col-3" id="retweet_<%= tweet[:id] %>"><%= render partial: 'layouts/retweet', locals: { tweet: tweet } %></div>
+    <div class="col-3" id="bad_<%= tweet[:id] %>"><%= render partial: 'layouts/bad', locals: { tweet: tweet } %></div>
   </div></div>
+  </div>
+  <div class="collapse" id="collapseExample_<%= tweet[:id] %>">
+  <div id="replys"><%= render partial: 'layouts/replys', locals: { replys: Reply.where(tweet_id: tweet[:id]), tweet: Tweet.find(tweet[:id]), newreply: @newreply } %></div></div>
   <br>
 <% end %>
 
+<%= paginate tweets %>

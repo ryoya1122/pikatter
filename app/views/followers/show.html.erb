@@ -1,18 +1,11 @@
 <h2>フォロワーリスト</h2>
-<div class="table">
-	<thead>
-		<tr>
-			<th></th>
-			<th>ユーザー名</th>
-		</tr>
-	</thead>
+<table class="table row">
 	<tbody>
-
 <% @user.followers.each do |follower| %>
 	<tr>
-	<td><%= attachment_image_tag follower, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %></td>
-	<td><%= link_to follower.name, user_path(follower) %></td>
+	<td class="col-6"><%= attachment_image_tag follower, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %></td>
+	<td class="col-6"><%= link_to follower.name, user_path(follower) %></td>
 </tr>
 <% end %>
 </tbody>
-</div>
+</table>

@@ -1,0 +1,23 @@
+<div class="row">
+<%= form_for(@user) do |f| %>
+	<h2>ネガティブツイート制限</h2>
+    <div class="custom-control custom-switch">
+  	<%= f.check_box :negarest, class:"custom-control-input", id:"customSwitch1" %>
+  	<label class="custom-control-label" for="customSwitch1">ネガティブツイート制限を有効にする</label>
+	</div><br>
+	<label for="customRange">呟けなくなる感情指数の数値</label>
+	<%= f.range_field :negarest_value, class:"single-slider custom-range col-6" %><br>
+	<%= link_to "戻る", settings_path, class:"btn btn-danger rounded-pill" %>
+    <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
+<% end %></div>
+
+<script>$('.single-slider').jRange({
+  from: 0,
+  to: 100,
+  step: 1,
+  scale: [0,10,20,30,40,50,60,70,80,90,100],
+  format: '%s',
+  width: '100%',
+  theme: "theme-blue",
+  showLabels: false,
+});</script>

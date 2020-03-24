@@ -1,17 +1,11 @@
 <h2>フォローリスト</h2>
-<div class="table">
-	<thead>
-		<tr>
-			<th></th>
-			<th>ユーザー名</th>
-		</tr>
-	</thead>
+<table class="table">
 	<tbody>
 <% @user.followings.each do |following| %>
 	<tr>
-	<td><%= attachment_image_tag following, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %></td>
-	<td><%= link_to following.name, user_path(following) %></td>
+	<td class="col-6"><%= attachment_image_tag following, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %></td>
+	<td class="col-6"><%= link_to following.name, user_path(following) %></td>
 	</tr>
 <% end %>
 </tbody>
-</div>
+</table>

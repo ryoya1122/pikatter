@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find_by!(name: params[:name])
     	if @user.update(user_params)
-    		redirect_to user_path(@user)
+    		redirect_to settings_url
     	else
     		render :edit
     	end
@@ -25,6 +25,6 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:name, :image, :email, :color)
+		params.require(:user).permit(:name, :image, :email, :color, :nickname, :negablock, :negablock_value, :negarest, :negarest_value, :score_privacy_userpage, :score_privacy_rankings)
 	end
 end

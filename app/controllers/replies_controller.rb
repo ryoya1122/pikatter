@@ -7,7 +7,11 @@ class RepliesController < ApplicationController
 		@tweet = Tweet.find(params[:tweet_id])
 		@newreply = Reply.new
 	end
-	def new
+	
+	def destroy
+		@reply = Reply.find(params[:format])
+		@reply.destroy
+		redirect_to root_url
 	end
 
 	private

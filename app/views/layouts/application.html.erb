@@ -9,6 +9,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= stylesheet_link_tag    'jquery.range.css' %>
+    <%= javascript_include_tag "jquery.range.js" %>
   </head>
 
   <body>
@@ -22,13 +24,16 @@
         <% end %>
         <li class="nav-item"><a class="nav-link" href="/rankings">ランキング</a></li>
         <% if user_signed_in? %>
-        <li class="nav-item"><%= link_to '通知', notifications_path, class: 'nav-link' %></a></li>
+        <li class="nav-item"><%= link_to '通知', notifications_path, class: 'nav-link' %></li>
         <li class="nav-item"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
         <% else %>
         <li class="nav-item"><%= link_to 'login', new_user_session_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
       <ul class="navbar-nav mr-lg-2">
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to '設定', settings_path, class: 'nav-link' %></li>
+        <% end %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="languages" aria-haspopup="true" aria-expanded="false">日本語</a>
           <div class="dropdown-menu" aria-labelledby="languages">

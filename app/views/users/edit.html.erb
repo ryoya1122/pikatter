@@ -1,12 +1,17 @@
-<h2>ユーザー情報編集</h2>
+<div class="row">
 <%= form_for(@user) do |f| %>
+	<h2>ユーザー情報編集</h2>
     <Label>ユーザー名</Label>
-        <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"ユーザー名"%>
+        <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputUser", placeholder:"ユーザー名"%>
+    <Label>ニックネーム</Label>
+    	<%= f.text_field :nickname, autofocus: true, class:"form-control", id:"inputNickname", placeholder:"ニックネーム"%>
     <label>プロフィール画像</label><br>
     <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "user-edit-form" %><br>
     <label>メールアドレス</label>
-        <%= f.text_area :email, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"メールアドレス"%>
+        <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"メールアドレス"%>
     <label>テーマカラー</label>
-    	<%= f.select :color, [["青", "blue"], ["黄", "yellow"],  ["緑", "green"], ["赤", "red"],["白", "white"] ],  :prompt => "選択してください" %>
-    <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
+    	<%= f.select :color, [["青", "blue"], ["黄", "yellow"],  ["緑", "green"], ["赤", "red"],["白", "white"] ],  :prompt => "選択してください" %><br>
+        <%= link_to "戻る", settings_path, class:"btn btn-danger rounded-pill" %>
+        <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
 <% end %>
+</div>

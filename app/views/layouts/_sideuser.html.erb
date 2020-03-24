@@ -1,6 +1,6 @@
 <div class="card">
 	<div class="card-header">
-		<%= attachment_image_tag user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to user.name, user_path(user) %>
+		<%= attachment_image_tag user, :image, :fill, 40, 40, format: 'jpeg', class: "rounded-circle img-thumbnail", fallback: "no_image.jpg", size:'40x40' %><span class="align-middle h4 font-weight-bold"> <%= user.nickname %></span><span class="align-middle"> <%= link_to user.name, user_path(user) %></span>
 			
 		</div>
 	<div class="card-body row">

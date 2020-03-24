@@ -1,15 +1,13 @@
+<div class="row"><div class="col-10 offset-2">
 <% replys.each do |reply| %>
-<div class="card">
-	<div class="card-header">
+<div class="card"><div class="card-body">
 		<div><i class="fas fa-reply" aria-hidden="true"></i></div>
-		<%= attachment_image_tag reply.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %><%= link_to reply.user.name, user_path(reply.user) %>
-	</div>
-	<div class="card-body">
-		<%= reply.body %><br><p class="text-right"><%= time_ago_in_words(reply.created_at) %></p>
+		<%= attachment_image_tag reply.user, :image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img tableimage", fallback: "no_image.jpg", size:'40x40' %> <span class="align-middle h4"><%= reply.user.nickname %></span> <%= link_to reply.user.name, user_path(reply.user) %>
+	<%= link_to "削除", tweet_replies_d_path(Tweet.find(tweet[:id]), reply), method: :delete, data: { remote: true, confirm: '本当に削除しますか?' } , class: "btn btn-danger float-right" %><br>
+		<%= reply.body %><p class="text-right"><%= time_ago_in_words(reply.created_at) %></p>
 	</div>
 </div>
 <% end %>
-
 <div class="card">
 			<div class="card-header">
 				<i class="fas fa-reply" aria-hidden="true"></i>
@@ -26,3 +24,5 @@
 				<% end %>
 			</div>
 		</div>
+	</div>
+</div>

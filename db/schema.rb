@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_171436) do
+ActiveRecord::Schema.define(version: 2020_03_23_215555) do
 
   create_table "average_scores", force: :cascade do |t|
     t.integer "user_id"
@@ -105,6 +105,13 @@ ActiveRecord::Schema.define(version: 2020_03_20_171436) do
     t.integer "tweet_count", default: 0
     t.float "score_average", default: 0.0
     t.string "color", default: "white"
+    t.string "nickname", null: false
+    t.boolean "negablock", default: false
+    t.integer "negablock_value", default: 100
+    t.boolean "negarest", default: false
+    t.integer "negarest_value", default: 0
+    t.boolean "score_privacy_userpage", default: false
+    t.boolean "score_privacy_rankings", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="card">
+		<div class="card-body">
+			<%= link_to "ユーザー情報編集", edit_user_path(@user) %>
+			<span>プロフィールやテーマカラーの変更を行います。</span>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<%= link_to "ネガティブロック" %>
+			<span>一定以下の感情指数のツイートのタイムラインへの非表示を設定する事ができます。</span>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<%= link_to "ネガティブツイート制限" %>
+			<span>一定以下の感情指数のツイートをツイートできないように設定する事ができます。</span>
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<%= link_to "感情指数プライバシー設定" %>
+			<span>自分の感情指数の公開・非公開を設定できます。</div>
+		</div>
+	</div>
+</div>
