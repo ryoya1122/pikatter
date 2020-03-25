@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 	helper_method :tweets_get
-
+	helper_method :notification_check
+	add_flash_types :success, :info, :warning, :danger
 	def tweets_get
 		user = current_user
 		users = user.followings
@@ -35,6 +36,11 @@ class ApplicationController < ActionController::Base
 			tweet_array.push(tweet_hash)
 		end
 		group_by_id = tweet_array.group_by{|a| a[:id] }
-		return group_by_id
+	end
+
+	def notification_check
+		if user_signed_in?
+		notification_check = Notification.where(visited_id: current_user.id, checked: false).empty?
+	end
 	end
 end

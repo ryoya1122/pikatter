@@ -1,4 +1,6 @@
 class RetweetsController < ApplicationController
+  before_action :notification_check
+  
 	def create
 		@tweet = Tweet.find(params[:tweet_id])
         retweet = current_user.retweets.new(tweet_id: @tweet.id)

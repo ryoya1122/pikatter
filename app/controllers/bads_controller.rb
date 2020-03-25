@@ -1,4 +1,6 @@
 class BadsController < ApplicationController
+	before_action :notification_check
+	
 	def create
 		@tweet = Tweet.find(params[:tweet_id])
         bad = current_user.bads.new(tweet_id: @tweet.id)

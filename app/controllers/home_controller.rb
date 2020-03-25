@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
 	before_action :authenticate_user!
+	before_action :notification_check
 	PER = 8
 
 	def index
@@ -14,7 +15,5 @@ class HomeController < ApplicationController
 
 	def settings
 		@user = current_user
-		
 	end
-
 end

@@ -1,4 +1,9 @@
 <%= form_for newtweet, remote: true do |f| %>
+  <% unless flash[:warning] == nil %>
+    <div class="alert alert-warning">
+      <%= flash[:warning].html_safe %>
+    </div>
+  <% end %>
   <div class="form-group row">
     <%= f.text_field :body, :placeholder => 'ツイート内容を入力', class:'col-12 form-control' %>
   </div>
@@ -7,6 +12,7 @@
   </div>
 <% end %><br>
 <% tweets.each do |tweet| %>
+<% unless current_user.negablock && tweet[:score] < current_user.negablock_value %>
 <div class="card">
   <div class="card-body"><%= attachment_image_tag User.find(tweet[:user_id]), :image, :fill, 60, 60, format: 'jpeg', class: "rounded-circle img-thumbnail", fallback: "no_image.jpg", size:'60x60' %> <span class="align-middle h4"><%= User.find(tweet[:user_id]).nickname %></span> <%= link_to User.find(tweet[:user_id]).name, user_path(User.find(tweet[:user_id])), class:"font-weight-bold align-middle" %>
     <% if tweet[:user_id] == current_user.id.to_s %>
@@ -46,6 +52,7 @@
   <div class="collapse" id="collapseExample_<%= tweet[:id] %>">
   <div id="replys"><%= render partial: 'layouts/replys', locals: { replys: Reply.where(tweet_id: tweet[:id]), tweet: Tweet.find(tweet[:id]), newreply: @newreply } %></div></div>
   <br>
+  <% end %>
 <% end %>
 
 <%= paginate tweets %>

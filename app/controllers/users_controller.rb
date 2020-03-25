@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :notification_check
+	
 	def show
 		@user = User.find_by!(name: params[:name])
 		@tweets = Tweet.where(user_id: @user.id).order(id: "DESC")
@@ -22,7 +24,13 @@ class UsersController < ApplicationController
     		render :edit
     	end
 	end
-
+	def destroy
+		user = current_user
+		user.passive_notifications.destroy_all
+		user.active_notifications.destroy_all
+		user.destroy
+		redirect_to root_url
+	end
 	private
 	def user_params
 		params.require(:user).permit(:name, :image, :email, :color, :nickname, :negablock, :negablock_value, :negarest, :negarest_value, :score_privacy_userpage, :score_privacy_rankings)

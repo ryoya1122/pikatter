@@ -3,9 +3,20 @@
 		<div class="card card-body">
 		<h2><%= attachment_image_tag @user, :image, :fill, 80, 80, format: 'jpeg', class: "rounded-circle img-thumbnail", fallback: "no_image.jpg", size:'80x80' %><%= @user.nickname %>さんの感情分析</h2></div><br>
 		<div class="card card-body"><h3><%= @user.nickname %>さんの平均感情スコア</h3>
-			<span class="align-middle h4"><%= @user.score_average.round %></span></div>
+			<span class="align-middle h4">
+				<% if @user.score_privacy_userpage %>
+					非公開になっています<i class="fas fa-lock"></i>
+				<% else %>
+					<%= @user.score_average.round %>
+				<% end %></span></div>
 		<div class="card card-body"><h3><%= @user.nickname %>さんの1週間感情移行</h3>
-		<div class="bg-transparent bg-dark"><%= line_chart @graph, min: 0, max: 100, download: {background: "#ffffff"} %></div></div>
+			<% if @user.score_privacy_userpage %>
+				<span class="align-middle h4">非公開になっています<i class="fas fa-lock"></i></span>
+			<% else %>
+		<div class="bg-transparent bg-dark"><%= line_chart @graph, min: 0, max: 100, download: {background: "#ffffff"} %></div>
+			<% end %>
+
+	</div>
 		<div class="card">
 			<% if @most_positive.blank? %>
 			このユーザーのツイートは見つかりませんでした

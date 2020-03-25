@@ -1,4 +1,6 @@
 class RepliesController < ApplicationController
+	before_action :notification_check
+	
 	def create
 		@newreply = Reply.new(reply_params)
 		@newreply.user_id = current_user.id

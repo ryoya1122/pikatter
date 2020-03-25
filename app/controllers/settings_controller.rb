@@ -1,5 +1,6 @@
 class SettingsController < ApplicationController
 	before_action :set_user
+	before_action :notification_check
 
 
 	def index
@@ -10,7 +11,9 @@ class SettingsController < ApplicationController
 	end
 	def privacy
 	end
-
+	def withdraw
+	end
+	
 	private
 
 	def set_user

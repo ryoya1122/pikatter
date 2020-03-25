@@ -2,16 +2,21 @@
 <p>通知はありません</p>
 <% else %>
 	<% @notifications.each do |notification| %>
-		<div class="card">
-		<%= link_to notification.visitor.name, user_path(notification.visitor) %>さんが<br>
-		<%= link_to notification.tweet.body.truncate(24), tweet_path(notification.tweet) %>を
+	<div class="card">
+		<div class="card-body">
+		<span class="align-middle"><%= notification.visitor.nickname %> (<%= link_to notification.visitor.name, user_path(notification.visitor) %>)さんが
+		<% unless notification.action == 'follow' %>
+		<%= link_to notification.tweet.body.truncate(24), tweet_path(notification.tweet) %><% else %>あなた<% end %>を
 		<% case notification.action %>
 		<% when 'favorite' %>
 		いいねしました
 		<% when 'retweet' %>
 		リツイートしました
-		<% end %><br>
+		<% when 'follow' %>
+		フォローしました
+		<% end %></span><div class="text-right"><span><%= time_ago_in_words(notification.created_at) %>前</span></div>
 		</div>
+	</div>
 	<% end %>
 <%= paginate @notifications %>
 <% end %>

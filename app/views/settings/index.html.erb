@@ -1,26 +1,42 @@
 <div class="row">
-	<div class="card">
+	<div class="card col-md-6 offset-md-3">
 		<div class="card-body">
-			<%= link_to "ユーザー情報編集", edit_user_path(@user) %>
-			<span>プロフィールやテーマカラーの変更を行います。</span>
+			<%= link_to "ユーザー情報編集", edit_user_path(@user) %><br>
+			<span>-プロフィールやテーマカラーの変更を行います。</span>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card col-md-6 offset-md-3">
 		<div class="card-body">
-			<%= link_to "ネガティブロック", settings_negablock_path %>
-			<span>一定以下の感情指数のツイートのタイムラインへの非表示を設定する事ができます。</span>
+			<%= link_to "ネガティブロック", settings_negablock_path %><br>
+			<span>-一定以下の感情指数のツイートのタイムラインへの非表示を設定する事ができます。</span>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card col-md-6 offset-md-3">
 		<div class="card-body">
-			<%= link_to "ネガティブツイート制限", settings_negastrict_path %>
-			<span>一定以下の感情指数のツイートをツイートできないように設定する事ができます。</span>
+			<%= link_to "ネガティブツイート制限", settings_negastrict_path %><br>
+			<span>-一定以下の感情指数のツイートをツイートできないように設定する事ができます。</span>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card col-md-6 offset-md-3">
 		<div class="card-body">
-			<%= link_to "感情指数プライバシー設定", settings_privacy_path %>
-			<span>自分の感情指数の公開・非公開を設定できます。</div>
+			<%= link_to "感情指数プライバシー設定", settings_privacy_path %><br>
+			<span>-自分の感情指数の公開・非公開を設定できます。</span></div>
 		</div>
-	</div>
+			<button type="button" class="btn btn-danger col-md-2 offset-md-7" data-toggle="modal" data-target="#Modal">退会する</button>
+			<br>
+			</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        </button>
+      <div class="modal-body">
+        <span class="text-danger">退会すると過去のツイートや、感情分析情報など全ての情報が削除されます。</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+        <%= link_to "退会する", user_path(current_user), method: :delete, class:"btn btn-danger" %>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div>

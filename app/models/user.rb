@@ -6,11 +6,11 @@ class User < ApplicationRecord
 
   has_many :tweets, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :favorited_tweets, through: :favorites, source: :tweet
+  has_many :favorited_tweets, through: :favorites, source: :tweet, dependent: :destroy
   has_many :relationships, dependent: :destroy
-  has_many :followings, through: :relationships, source: :follow
-  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id'
-  has_many :followers, through: :reverse_of_relationships, source: :user
+  has_many :followings, through: :relationships, source: :follow, dependent: :destroy
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :user, dependent: :destroy
   has_many :average_scores, dependent: :destroy
   has_many :retweets, dependent: :destroy
   has_many :bads, dependent: :destroy

@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   get '/settings/negablock', to: 'settings#negablock'
   get '/settings/negastrict', to: 'settings#negastrict'
   get '/settings/privacy', to: 'settings#privacy'
-
+  get '/settings/withdraw', to: 'settings#withdraw'
+  
 end

@@ -24,7 +24,7 @@
         <% end %>
         <li class="nav-item"><a class="nav-link" href="/rankings">ランキング</a></li>
         <% if user_signed_in? %>
-        <li class="nav-item"><%= link_to '通知', notifications_path, class: 'nav-link' %></li>
+        <li class="nav-item icon-stack"><a class="nav-link" href="/notifications" style="position: relative">通知<% unless notification_check %><i class="fas fa-circle n-circle"></i><% end %></a></li>
         <li class="nav-item"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
         <% else %>
         <li class="nav-item"><%= link_to 'login', new_user_session_path, class: 'nav-link' %></li>

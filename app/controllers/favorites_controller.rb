@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+  before_action :notification_check
+  
 	def create
 		@tweet = Tweet.find(params[:tweet_id])
         favorite = current_user.favorites.new(tweet_id: @tweet.id)
