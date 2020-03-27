@@ -4,6 +4,10 @@ lock "~> 3.12.0"
 set :application, "pikatter"
 set :repo_url, "git@github.com:ryoya1122/pikatter.git"
 
+set :deploy_to, "/home/ec2-user/pikatter"
+set :rbenv_ruby, '2.5.7'
+set :linked_files, %w{config/master.key .env}
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -37,21 +41,3 @@ set :repo_url, "git@github.com:ryoya1122/pikatter.git"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-
-set :deploy_to, "/home/ec2-user/pikatter"
-set :rbenv_ruby, '2.5.7'
-set :linked_files, %w{config/master.key .env}
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-namespace :deploy do
-  desc 'Database'
-  task :db_migrate do
-    on roles(:app) do |host|
-      with rails_env: fetch(:rails_env) do
-        within current_path do
-          execute :bundle, :exec, :rake, 'db:migrate'
-        end
-      end
-    end
-  end
-end
-after 'bundler:install', 'deploy:db_migrate'

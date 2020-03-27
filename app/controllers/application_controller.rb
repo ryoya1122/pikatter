@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 	helper_method :tweets_get
 	helper_method :notification_check
 	add_flash_types :success, :info, :warning, :danger
+	layout :layout_by_resource
 	def tweets_get
 		user = current_user
 		users = user.followings
@@ -43,4 +44,14 @@ class ApplicationController < ActionController::Base
 		notification_check = Notification.where(visited_id: current_user.id, checked: false).empty?
 	end
 	end
+
+	protected
+
+  def layout_by_resource
+    if devise_controller?
+      "devise"
+    else
+      "application"
+    end
+  end
 end

@@ -1,26 +1,30 @@
-<h2>ログイン画面</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+</div>
+<div class="container" style="height: 80vh;">
+<h1 class="font-weight-bold text-center align-middle" style="line-height: 40vh;">感情を数値化するSNS Pikatter</h1><br>
+<div class="row">
+<button type="button" class="btn btn-primary col-6" data-toggle="collapse" data-target="#collapseLogin" aria-expanded="false" aria-controls="collapseLogin">
+ログイン
+</button>
+<%= link_to "新規登録", new_registration_path(resource_name), class:"btn btn-success col-6" %>
+</div>
+<div class="collapse row" id="collapseLogin">
+  <div class="card card-body col-6">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <label>ユーザー名</label>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control" %>
+  </div>
+     <div class="field">
+    <label>パスワード</label>
+    <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="actions row">
+    <%= f.submit "ログイン", class:"form-control btn btn-success col-md-6 offset-md-3" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+  
+</div>
+</div>
