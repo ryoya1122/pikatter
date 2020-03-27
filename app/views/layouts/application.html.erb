@@ -15,7 +15,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bs-navbar bg-primary">
-    <a class="navbar-brand mr-0 mr-md-2"><%= link_to 'Pikatter', root_path, class: 'nav-link' %></a>
+    <a class="navbar-brand mr-0 mr-md-2" href="/"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="Navbar">
       <ul class="navbar-nav mr-auto">
@@ -34,12 +34,6 @@
         <% if user_signed_in? %>
           <li class="nav-item"><%= link_to '設定', settings_path, class: 'nav-link' %></li>
         <% end %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="languages" aria-haspopup="true" aria-expanded="false">日本語</a>
-          <div class="dropdown-menu" aria-labelledby="languages">
-            <a class="dropdown-item" href="#">#多言語導入予定</a>
-          </div>
-        </li>
       </ul>
     </div>
   </nav>

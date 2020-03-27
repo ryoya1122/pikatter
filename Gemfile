@@ -79,6 +79,8 @@ gem 'jquery-rails'
 gem 'pry-byebug'
 gem 'dotenv-rails'
 gem 'groupdate'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
 
 group :production do
   gem 'mysql2'

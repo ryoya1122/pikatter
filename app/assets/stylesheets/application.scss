@@ -38,3 +38,10 @@ body {
   color: #efa04c;
   font-size: 0.5em
 }
+
+.navbar-brand {
+  background: image-url("logo.png") no-repeat left center;
+  background-size: contain;
+  height: 25px;
+  width: 125px;
+}
