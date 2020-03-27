@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_many :replys, dependent: :destroy
   attachment :image
+  validates :name, format: {with: /\A[a-z0-9]+\z/ }, length: { in: 4..12 }
+  validates :nickname, length: { in: 1..11 }
   def to_param
     name
   end
