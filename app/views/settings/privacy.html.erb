@@ -1,6 +1,8 @@
 <div class="row">
 <%= form_for(@user) do |f| %>
-	<h2>プライバシー設定</h2>
+	<div class="card"><div class="card-header">
+	<h2>プライバシー設定</h2></div>
+	<div class="card-body">
     <div class="custom-control custom-switch">
   	<%= f.check_box :score_privacy_userpage, class:"custom-control-input", id:"customSwitch1" %>
   	<label class="custom-control-label" for="customSwitch1">ユーザーページの感情指数平均、グラフを非表示にする</label>
@@ -10,5 +12,5 @@
   	<label class="custom-control-label" for="customSwitch2">ランキングに表示されないようにする</label>
 	</div><br>
 	<%= link_to "戻る", settings_path, class:"btn btn-danger rounded-pill" %>
-    <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
+    <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %></div>
 <% end %></div>

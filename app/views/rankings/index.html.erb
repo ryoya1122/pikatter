@@ -1,14 +1,14 @@
 <div class="row">
 <div class="col-md-10 offset-md-1">
-<div class="card"><div class="card-header">
-<h1>全ユーザー<%= User.all.count %>人の平均感情スコア<br></h1></div>
-<div class="card-body">
-<h2><%= @score_average %></h2></div>
-<div class="card"><div class="card-header">
-<h1>ポジティブランキング</h1></div>
-<div class="card-body">
+<table class="table table-dark">
+<tr><th>全ユーザー<%= User.all.count %>人の平均感情スコア</th></tr>
+<tr><th><%= @score_average %></th></tr>
+</table>
+
+<table class="table table-dark">
+	<tr><th>ユーザー</th><th>スコア</th></tr>
 <% @users.each_with_index do |user, i| %>
-<h3><%= i+1 %>位 <%= user.nickname %> <%= link_to user.name, user_path(user), class:"font-weight-bold align-middle" %> <%= user.score_average.round %><br></h3>
-<% end %></div>
-</div></div>
+<tr><td><%= i+1 %>位 <%= user.nickname %> <%= link_to user.name, user_path(user), class:"font-weight-bold align-middle" %></td><td><%= user.score_average.round %></td></tr>
+<% end %>
+</table></div></div>
 

@@ -1,6 +1,8 @@
 <div class="row">
 <%= form_for(@user) do |f| %>
-	<h2>ユーザー情報編集</h2>
+    <div class="card"><div class="card-header">
+	<h2>ユーザー情報編集</h2></div>
+    <div class="card-body">
     <Label>ユーザー名</Label>
         <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputUser", placeholder:"ユーザー名"%>
     <Label>ニックネーム</Label>
@@ -9,9 +11,8 @@
     <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "user-edit-form" %><br>
     <label>メールアドレス</label>
         <%= f.email_field :email, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"メールアドレス"%>
-    <label>テーマカラー</label>
-    	<%= f.select :color, [["青", "blue"], ["黄", "yellow"],  ["緑", "green"], ["赤", "red"],["白", "white"] ],  :prompt => "選択してください" %><br>
         <%= link_to "戻る", settings_path, class:"btn btn-danger rounded-pill" %>
         <%= f.submit "更新する", class:"btn btn-primary rounded-pill" %>
+    </div>
 <% end %>
 </div>
