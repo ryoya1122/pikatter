@@ -21,7 +21,7 @@
 			<% if @most_positive.blank? %>
 			このユーザーのツイートは見つかりませんでした
 			<% else %>
-  <div class="card-header bg-info"><%= @user.nickname %>さんの今月もっともポジティブだったつぶやき</div><br>
+  <div class="card-header bg-info"><%= @user.nickname %>さんのもっともポジティブだったつぶやき</div><br>
   <div class="card-body">
   <h4><%= @most_positive.body %></h4><br>
   <div class="progress">
@@ -47,7 +47,7 @@
 			<% if @most_negative.blank? %>
 			このユーザーのツイートは見つかりませんでした
 			<% else %>
-  <div class="card-header bg-danger"><%= @user.nickname %>さんの今月もっともネガティブだったつぶやき</div><br>
+  <div class="card-header bg-danger"><%= @user.nickname %>さんのもっともネガティブだったつぶやき</div><br>
   <div class="card-body">
   <h4><%= @most_negative.body %></h4><br>
   <div class="progress">
