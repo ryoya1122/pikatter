@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
 		following_user_id = user.followings.map(&:id).push(current_user.id)
 		retweet_ids = Retweet.where(user_id: following_user_id)
 		tweet_array = []
-		tweet_hash = Hash.new{[]}
 		retweet_ids.each do |retweet_id|
 			tweet_hash = Hash.new{[]}
 			tweet_hash[:id]=retweet_id.tweet.id

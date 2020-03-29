@@ -2,7 +2,7 @@
 	<div class="col-6">
 		<div class="card card-body">
 		<h2><%= attachment_image_tag @user, :image, :fill, 80, 80, format: 'jpeg', class: "rounded-circle img-thumbnail", fallback: "no_image.jpg", size:'80x80' %><%= @user.nickname %>さんの感情分析</h2></div><br>
-		<div class="card card-body"><h3><%= @user.nickname %>さんの平均感情スコア</h3>
+		<div class="card card-body"><h5><%= @user.nickname %>さんの平均感情スコア</h5>
 			<span class="align-middle h4">
 				<% if @user.score_privacy_userpage %>
 					非公開になっています<i class="fas fa-lock"></i>

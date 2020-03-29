@@ -19,8 +19,12 @@
 <%= link_to "削除", tweet_path(Tweet.find(tweet[:id])), method: :delete, data: { remote: true, confirm: '本当に削除しますか?' } , class: "btn btn-danger float-right" %>
     <% end %>
     <% if tweet[:status]==1 %>
-    <h6><span class="text-secondary"><i class="fas fa-retweet" aria-hidden="true"></i><%= link_to User.find(tweet[:status_by]).name, user_path(User.find(tweet[:status_by])) %>さんがリツイートしました</span></h6>
-    <% end %><br>
+    <h6 class="text-secondary"><i class="fas fa-retweet" aria-hidden="true">
+    </i>
+    <%= link_to User.find(tweet[:status_by]).name, user_path(User.find(tweet[:status_by])) %>さんがリツイートしました</span>
+    </h6>
+    <% end %>
+    <br>
   <span class="align-middle h4"><%= tweet[:body] %></span><br>
   <div class="text-right"><span><%= time_ago_in_words(tweet[:created_at]) %>前</span></div>
   <%#<div class="row">
@@ -42,14 +46,14 @@
 	</div>
 		<div class="card-footer">
     <div class="row">
-    <div class="col-3" id="reply_<%= tweet[:id] %>"><a data-toggle="collapse" data-target="#collapseExample_<%= tweet[:id] %>" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-reply" aria-hidden="true"></i> <%= Tweet.find(tweet[:id]).replys.count %></a>
+    <div class="col-3" id="reply_<%= tweet[:id] %>"><a data-toggle="collapse" data-target="#collapseReply_<%= tweet[:id] %>" aria-expanded="false" aria-controls="collapseReply"><i class="fas fa-reply" aria-hidden="true"></i> <%= Tweet.find(tweet[:id]).replys.count %></a>
     </div>
     <div class="col-3" id="like_<%= tweet[:id] %>"><%= render partial: 'layouts/like', locals: { tweet: tweet } %></div>
     <div class="col-3" id="retweet_<%= tweet[:id] %>"><%= render partial: 'layouts/retweet', locals: { tweet: tweet } %></div>
     <div class="col-3" id="bad_<%= tweet[:id] %>"><%= render partial: 'layouts/bad', locals: { tweet: tweet } %></div>
   </div></div>
   </div>
-  <div class="collapse" id="collapseExample_<%= tweet[:id] %>">
+  <div class="collapse" id="collapseReply_<%= tweet[:id] %>">
   <div id="replys"><%= render partial: 'layouts/replys', locals: { replys: Reply.where(tweet_id: tweet[:id]), tweet: Tweet.find(tweet[:id]), newreply: @newreply } %></div></div>
   <br>
   <% end %>

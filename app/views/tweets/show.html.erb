@@ -28,13 +28,13 @@
 	</div>
 	</div>
     <div class="row">
-    	<div class="col-3" id="reply_<%= @tweet.id %>"><a data-toggle="collapse" data-target="#collapseExample_<%= @tweet.id %>" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-reply" aria-hidden="true"></i> <%= @tweet.replys.count %></a>
+    	<div class="col-3" id="reply_<%= @tweet.id %>"><a data-toggle="collapse" data-target="#collapseReply_<%= @tweet.id %>" aria-expanded="false" aria-controls="collapseReply"><i class="fas fa-reply" aria-hidden="true"></i> <%= @tweet.replys.count %></a>
     </div>
     <div class="col-3" id="like_<%= @tweet.id %>"><%= render partial: 'layouts/like', locals: { tweet: @tweet } %></div>
     <div class="col-3" id="retweet_<%= @tweet.id %>"><%= render partial: 'layouts/retweet', locals: { tweet: @tweet } %></div>
     <div class="col-3" id="bad_<%= @tweet.id %>"><%= render partial: 'layouts/bad', locals: { tweet: @tweet } %></div>
 	</div>
-</div><div class="collapse" id="collapseExample_<%= @tweet.id %>">
+</div><div class="collapse" id="collapseReply_<%= @tweet.id %>">
 		<div id="replys"><%= render partial: 'layouts/replys', locals: { replys: @replys, tweet: @tweet, newreply: @newreply } %></div></div>
 		
 
