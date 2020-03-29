@@ -1,24 +1,16 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Readme for Pikatter
+## 概要
+	Pikatterは感情分析機能をメインとしたSNSサービスです。
+	サービスURL:http://pikateu.xyz
+## 使用Gem
+	 COTOHA
+	Devise
+	bootstrap
+	jquery-rails
+	dotenv-rails
+	groupdate
+	devise-i18n
+	chartkick
+	Capistrano
+##　何か問い合わせ等ありましたらこちらまでお願いします
+	Mail:koba.jht@gmail.com
