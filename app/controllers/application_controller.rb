@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
+	protect_from_forgery with: :exception
 	helper_method :tweets_get
 	helper_method :notification_check
 	add_flash_types :success, :info, :warning, :danger
 	layout :layout_by_resource
+
+	rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  	rescue_from ActionController::RoutingError, with: :render_404
+  	rescue_from Exception, with: :render_500
 	def tweets_get
 		user = current_user
 		users = user.followings
@@ -41,8 +46,23 @@ class ApplicationController < ActionController::Base
 	def notification_check
 		if user_signed_in?
 		notification_check = Notification.where(visited_id: current_user.id, checked: false).empty?
+		end
 	end
-	end
+
+	def render_404(exception = nil)
+    	if exception
+      		logger.info "Rendering 404 with exception: #{exception.message}"
+    	end
+    	render template: "errors/error_404", status: 404, layout: 'application'
+  	end
+
+  	def render_500(exception = nil)
+    	if exception
+      		logger.info "Rendering 500 with exception: #{exception.message}"
+   		end
+    	render template: "errors/error_500", status: 500, layout: 'application'
+  	end
+
 
 	protected
 

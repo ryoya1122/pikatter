@@ -21,7 +21,7 @@
     <% if tweet[:status]==1 %>
     <h6 class="text-secondary"><i class="fas fa-retweet" aria-hidden="true">
     </i>
-    <%= link_to User.find(tweet[:status_by]).name, user_path(User.find(tweet[:status_by])) %>さんがリツイートしました</span>
+    <%= link_to User.find(tweet[:status_by]).name, user_path(User.find(tweet[:status_by])) %>さんがリツイートしました
     </h6>
     <% end %>
     <br>

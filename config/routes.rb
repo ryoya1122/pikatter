@@ -28,5 +28,5 @@ Rails.application.routes.draw do
   get '/settings/negastrict', to: 'settings#negastrict'
   get '/settings/privacy', to: 'settings#privacy'
   get '/settings/withdraw', to: 'settings#withdraw'
-  
+  get '*path', to: 'application#render_404'
 end

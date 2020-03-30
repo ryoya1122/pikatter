@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
 	before_action :notification_check
-	
+	before_action :set_user
 	def show
-		@user = User.find_by!(name: params[:name])
 		@tweets = Tweet.where(user_id: @user.id).order(id: "DESC")
 		@most_positive = Tweet.where(user_id: @user.id).order("score DESC").first
 		@most_negative = Tweet.where(user_id: @user.id).order("score").first
@@ -14,10 +13,12 @@ class UsersController < ApplicationController
 		end
 	end
 	def edit
-		@user = User.find_by!(name: params[:name])
+		check_user = current_user
+		unless @user == check_user
+			redirect_to edit_user_url(User.find_by!(name: current_user.name))
+		end
 	end
 	def update
-		@user = User.find_by!(name: params[:name])
     	if @user.update(user_params)
     		redirect_to settings_url
     	else
@@ -32,6 +33,10 @@ class UsersController < ApplicationController
 		redirect_to root_url
 	end
 	private
+
+	def set_user
+		@user = User.find_by!(name: params[:name])
+	end
 	def user_params
 		params.require(:user).permit(:name, :image, :email, :nickname, :negablock, :negablock_value, :negarest, :negarest_value, :score_privacy_userpage, :score_privacy_rankings)
 	end
