@@ -1,3 +1,13 @@
+class ErrorAvoid
+  def initialize
+    @ips = "attachments/"
+  end
+ 
+  def matches?(request)
+    @ips.include?(request.url)
+  end
+end
+
 Rails.application.routes.draw do
   root to: "home#index"
 
@@ -28,5 +38,6 @@ Rails.application.routes.draw do
   get '/settings/negastrict', to: 'settings#negastrict'
   get '/settings/privacy', to: 'settings#privacy'
   get '/settings/withdraw', to: 'settings#withdraw'
-  get '*path', to: 'application#render_404'
+  get '*path', to: 'application#render_404',
+    constraints: ErrorAvoid.new
 end

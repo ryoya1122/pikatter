@@ -13,10 +13,7 @@ class UsersController < ApplicationController
 		end
 	end
 	def edit
-		check_user = current_user
-		unless @user == check_user
-			redirect_to edit_user_url(User.find_by!(name: current_user.name))
-		end
+		@user = current_user
 	end
 	def update
     	if @user.update(user_params)

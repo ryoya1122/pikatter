@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_215555) do
+ActiveRecord::Schema.define(version: 2020_03_31_083405) do
 
   create_table "average_scores", force: :cascade do |t|
     t.integer "user_id"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_215555) do
     t.boolean "score_privacy_userpage", default: false
     t.boolean "score_privacy_rankings", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
